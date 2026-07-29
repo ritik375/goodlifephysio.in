@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-paper text-ink font-body antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display text-ink;
+  }
+
+  /* Visible keyboard focus ring everywhere, respecting accessibility */
+  :focus-visible {
+    outline: 2px solid #1F6F5C;
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .container-clinic {
+    @apply max-w-7xl mx-auto px-5 sm:px-8 lg:px-10;
+  }
+
+  .eyebrow {
+    @apply font-mono text-xs tracking-[0.18em] uppercase text-accent-dark font-medium;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 bg-primary text-white font-body font-medium
+           px-6 py-3 rounded-full shadow-soft hover:bg-primary-dark transition-colors duration-200;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 bg-transparent text-ink font-body font-medium
+           px-6 py-3 rounded-full border border-ink/20 hover:border-ink/50 transition-colors duration-200;
+  }
+
+  .btn-accent {
+    @apply inline-flex items-center justify-center gap-2 bg-accent text-white font-body font-medium
+           px-6 py-3 rounded-full shadow-soft hover:bg-accent-dark transition-colors duration-200;
+  }
+
+  .card {
+    @apply bg-surface rounded-card border border-line shadow-soft;
+  }
+
+  .input-field {
+    @apply w-full rounded-lg border border-line bg-surface px-4 py-2.5 text-ink placeholder:text-slate-light
+           focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors;
+  }
+
+  .label-field {
+    @apply block text-sm font-medium text-ink mb-1.5;
+  }
+}
