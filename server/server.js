@@ -21,6 +21,7 @@ const clinicInfoRoutes = require('./routes/clinicInfoRoutes');
 
 const app = express();
 
+
 // ---------------------------------------------------------------------
 // Middleware
 // ---------------------------------------------------------------------
@@ -68,9 +69,16 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 
 // ---------------------------------------------------------------------
-// API Routes
+// Test Routes
 // ---------------------------------------------------------------------
 
+// Root test route
+app.get('/', (req, res) => {
+  res.send('GoodLife Physio API is Live 🚀');
+});
+
+
+// Health check
 app.get('/api/health', (req, res) => {
   res.json({
     success: true,
@@ -78,6 +86,10 @@ app.get('/api/health', (req, res) => {
   });
 });
 
+
+// ---------------------------------------------------------------------
+// API Routes
+// ---------------------------------------------------------------------
 
 app.use('/api/auth', authRoutes);
 app.use('/api/services', serviceRoutes);
