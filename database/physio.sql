@@ -4,11 +4,11 @@
 -- Import with:  mysql -u root -p < database/physio.sql
 -- =====================================================================
 
-CREATE DATABASE IF NOT EXISTS physio_clinic
-  CHARACTER SET utf8mb4
-  COLLATE utf8mb4_unicode_ci;
+-- CREATE DATABASE IF NOT EXISTS physio_clinic
+--   CHARACTER SET utf8mb4
+--   COLLATE utf8mb4_unicode_ci;
 
-USE physio_clinic;
+-- USE physio_clinic;
 
 -- ---------------------------------------------------------------------
 -- Table: admins
