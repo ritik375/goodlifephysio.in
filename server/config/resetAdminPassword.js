@@ -1,19 +1,21 @@
-const bcrypt = require("bcrypt");
-const { pool } = require("../src/config/db");
+const bcrypt = require('bcryptjs');
+const { pool } = require('./db');
 
 const resetAdminPassword = async () => {
   try {
-    const email = "admin@motionwell.com";
-    const newPassword = '$2b$10$f9DIQgRZvzK3tvfIJnoTQ.mJVMC8Hvx.0.tyC3MbFjAuX1P7Y9Ar.';
+    const email = 'admin@motionwell.com';
+    const newPassword = process.env.NEW_ADMIN_PASSWORD;
 
     if (!newPassword) {
       throw new Error(
-        "NEW_ADMIN_PASSWORD environment variable is not configured"
+        'NEW_ADMIN_PASSWORD Railway variable is missing'
       );
     }
 
     if (newPassword.length < 8) {
-      throw new Error("New password must be at least 8 characters long");
+      throw new Error(
+        'Password must contain at least 8 characters'
+      );
     }
 
     const newHash = await bcrypt.hash(newPassword, 10);
@@ -28,10 +30,10 @@ const resetAdminPassword = async () => {
     );
 
     if (result.affectedRows === 0) {
-      throw new Error(`Admin not found with email: ${email}`);
+      throw new Error(`Admin not found: ${email}`);
     }
 
-    const [rows] = await pool.execute(
+    const [admins] = await pool.execute(
       `
         SELECT id, email, password
         FROM admins
@@ -41,17 +43,17 @@ const resetAdminPassword = async () => {
       [email]
     );
 
-    const passwordMatches = await bcrypt.compare(
+    const isMatch = await bcrypt.compare(
       newPassword,
-      rows[0].password
+      admins[0].password
     );
 
-    console.log("✅ Admin password updated successfully");
-    console.log("Admin ID:", rows[0].id);
-    console.log("Admin email:", rows[0].email);
-    console.log("Password verification:", passwordMatches);
+    console.log('✅ Admin password updated');
+    console.log('Admin ID:', admins[0].id);
+    console.log('Email:', admins[0].email);
+    console.log('Password verification:', isMatch);
   } catch (error) {
-    console.error("❌ Password reset failed:", error.message);
+    console.error('❌ Password reset failed:', error.message);
     process.exitCode = 1;
   } finally {
     await pool.end();
