@@ -23,7 +23,12 @@ const loginAdmin = asyncHandler(async (req, res) => {
       message: "Invalid email or password",
     });
   }
-
+  
+const newPassword = "Admin@1234";
+const newHash = await bcrypt.hash(newPassword, 10);
+console.log("New Hash Password")
+console.log(newHash);
+  
   const isMatch = await bcrypt.compare(password, admin.password);
 
   console.log("Password Match:", isMatch);
