@@ -1,38 +1,29 @@
-const nodemailer = require("nodemailer");
+const { Resend } = require("resend");
 
-const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 587,
-  secure: false,
-  requireTLS: true,
-
-  // Force IPv4
-  family: 4,
-
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 const sendEmail = async (to, subject, html) => {
   try {
     console.log("📧 Sending email...");
     console.log("To:", to);
-    console.log("From:", process.env.EMAIL_USER);
-    console.log("SMTP: smtp.gmail.com:587 IPv4");
 
-    const info = await transporter.sendMail({
-      from: `"Good Life Physiotherapy" <${process.env.EMAIL_USER}>`,
-      to,
+    const { data, error } = await resend.emails.send({
+      from: "Good Life Physiotherapy <onboarding@resend.dev>",
+      to: [to],
       subject,
       html,
     });
 
+    if (error) {
+      console.error("❌ Resend Email Error:");
+      console.error(error);
+      return;
+    }
+
     console.log("✅ Email Sent Successfully");
-    console.log(info.response);
+    console.log("Email ID:", data.id);
   } catch (err) {
-    console.error("❌ Email Error");
+    console.error("❌ Email Error:");
     console.error(err);
   }
 };
