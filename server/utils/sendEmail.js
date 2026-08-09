@@ -1,7 +1,10 @@
 const nodemailer = require("nodemailer");
 
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: "smtp.gmail.com",
+  port: 587,
+  secure: false,
+  requireTLS: true,
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
@@ -15,7 +18,7 @@ const sendEmail = async (to, subject, html) => {
     console.log("From:", process.env.EMAIL_USER);
 
     const info = await transporter.sendMail({
-      from: `"MotionWell Physiotherapy" <${process.env.EMAIL_USER}>`,
+      from: `"Good Life Physiotherapy" <${process.env.EMAIL_USER}>`,
       to,
       subject,
       html,

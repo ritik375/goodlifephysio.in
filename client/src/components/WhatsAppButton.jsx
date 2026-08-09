@@ -8,7 +8,7 @@ const WhatsAppButton = () => {
   if (!number) return null;
 
   const message = encodeURIComponent(
-    `Hi ${clinicInfo.clinic_name || 'MotionWell Physiotherapy'}, I'd like to know more about your treatments.`
+    `Hi ${clinicInfo.clinic_name || 'Good Life Physiotherapy & Rehabilitation Centre'}, I'd like to know more about your treatments.`
   );
 
   return (

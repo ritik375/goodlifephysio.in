@@ -20,7 +20,7 @@ const Contact = () => {
     e.preventDefault();
     const subject = encodeURIComponent(`Website inquiry from ${form.name}`);
     const body = encodeURIComponent(`${form.message}\n\n— ${form.name} (${form.email})`);
-    window.location.href = `mailto:${clinicInfo.email || 'care@motionwell.example'}?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:${clinicInfo.email || 'Good Life Physiotherapy & Rehabilitation Centre'}?subject=${subject}&body=${body}`;
     showToast('Opening your email client…');
   };
 

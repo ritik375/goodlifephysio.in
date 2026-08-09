@@ -54,7 +54,7 @@ const AdminLogin = () => {
               <label htmlFor="email" className="label-field">Email address</label>
               <div className="relative">
                 <FaEnvelope className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-light" size={14} />
-                <input id="email" type="email" name="email" required value={form.email} onChange={handleChange} className="input-field pl-11" placeholder="admin@motionwell.com" />
+                <input id="email" type="email" name="email" required value={form.email} onChange={handleChange} className="input-field pl-11" placeholder="admin@goodlifephysio.com" />
               </div>
             </div>
             <div>

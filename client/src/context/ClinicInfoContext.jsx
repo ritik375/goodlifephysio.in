@@ -5,7 +5,7 @@ export const ClinicInfoContext = createContext(null);
 
 // Sensible fallback so the UI never breaks if the API is briefly unreachable.
 const FALLBACK_INFO = {
-  clinic_name: 'MotionWell Physiotherapy',
+  clinic_name: 'Good Life Physiotherapy & Rehabilitation Centre',
   tagline: 'Restoring movement. Rebuilding strength.',
   about: '',
   address: '',
